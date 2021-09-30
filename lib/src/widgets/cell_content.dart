@@ -3,6 +3,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:table_calendar/src/widgets/calendar_header.dart';
 
 import '../customization/calendar_builders.dart';
 import '../customization/calendar_style.dart';
@@ -109,9 +110,21 @@ class CellContent extends StatelessWidget {
             duration: duration,
             margin: margin,
             padding: padding,
-            decoration: calendarStyle.todayDecoration,
+            decoration: calendarStyle.todayDecoration ??
+                BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: blue),
+                ),
             alignment: alignment,
-            child: Text(text, style: calendarStyle.todayTextStyle),
+            child: Text(
+              text,
+              style: calendarStyle.todayTextStyle ??
+                  TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                    color: blue,
+                  ),
+            ),
           );
     } else if (isHoliday) {
       cell = calendarBuilders.holidayBuilder?.call(context, day, focusedDay) ??
