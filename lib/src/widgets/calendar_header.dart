@@ -11,6 +11,8 @@ import 'custom_icon_button.dart';
 import 'format_button.dart';
 
 const blue = Color(0xFF455AFE);
+const grey = Color(0xFF666666);
+const lightGrey = Color(0xFF999999);
 
 Widget assetsImage({
   required String imgUrl,

@@ -79,7 +79,11 @@ class CellContent extends StatelessWidget {
             duration: duration,
             margin: margin,
             padding: padding,
-            decoration: calendarStyle.selectedDecoration,
+            decoration: calendarStyle.selectedDecoration ??
+                BoxDecoration(
+                  color: blue,
+                  borderRadius: BorderRadius.circular(5),
+                ),
             alignment: alignment,
             child: Text(text, style: calendarStyle.selectedTextStyle),
           );
@@ -116,14 +120,28 @@ class CellContent extends StatelessWidget {
                   border: Border.all(color: blue),
                 ),
             alignment: alignment,
-            child: Text(
-              text,
-              style: calendarStyle.todayTextStyle ??
-                  TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  style: calendarStyle.todayTextStyle ??
+                      TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: blue,
+                      ),
+                ),
+                SizedBox(height: 2),
+                Container(
+                  width: 2,
+                  height: 2,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
                     color: blue,
                   ),
+                ),
+              ],
             ),
           );
     } else if (isHoliday) {
@@ -155,7 +173,14 @@ class CellContent extends StatelessWidget {
             padding: padding,
             decoration: calendarStyle.outsideDecoration,
             alignment: alignment,
-            child: Text(text, style: calendarStyle.outsideTextStyle),
+            child: Text(
+              text,
+              style: calendarStyle.outsideTextStyle ??
+                  TextStyle(
+                    color: lightGrey.withOpacity(.5),
+                    fontWeight: FontWeight.w400,
+                  ),
+            ),
           );
     } else {
       cell = calendarBuilders.defaultBuilder?.call(context, day, focusedDay) ??
@@ -171,7 +196,11 @@ class CellContent extends StatelessWidget {
               text,
               style: isWeekend
                   ? calendarStyle.weekendTextStyle
-                  : calendarStyle.defaultTextStyle,
+                  : calendarStyle.defaultTextStyle ??
+                      TextStyle(
+                        color: grey,
+                        fontWeight: FontWeight.w400,
+                      ),
             ),
           );
     }

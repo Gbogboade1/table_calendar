@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter/widgets.dart';
+import 'package:table_calendar/src/widgets/calendar_header.dart';
 
 /// Class containing styling and configuration for `TableCalendar`'s content.
 class CalendarStyle {
@@ -81,7 +82,7 @@ class CalendarStyle {
   final TextStyle selectedTextStyle;
 
   /// Decoration for day cells that are currently marked as selected by `selectedDayPredicate`.
-  final Decoration selectedDecoration;
+  final Decoration? selectedDecoration;
 
   /// TextStyle for a day cell that is the start of current range selection.
   final TextStyle rangeStartTextStyle;
@@ -103,7 +104,7 @@ class CalendarStyle {
 
   /// TextStyle for day cells, of which the `day.month` is different than `focusedDay.month`.
   /// This will affect day cells that do not match the currently focused month.
-  final TextStyle outsideTextStyle;
+  final TextStyle? outsideTextStyle;
 
   /// Decoration for day cells, of which the `day.month` is different than `focusedDay.month`.
   /// This will affect day cells that do not match the currently focused month.
@@ -134,7 +135,7 @@ class CalendarStyle {
   final Decoration weekendDecoration;
 
   /// TextStyle for day cells that do not match any other styles.
-  final TextStyle defaultTextStyle;
+  final TextStyle? defaultTextStyle;
 
   /// Decoration for day cells that do not match any other styles.
   final Decoration defaultDecoration;
@@ -171,15 +172,12 @@ class CalendarStyle {
     this.todayDecoration,
     this.selectedTextStyle = const TextStyle(
       color: const Color(0xFFFAFAFA),
-      fontSize: 16.0,
+      fontSize: 14.0,
     ),
-    this.selectedDecoration = const BoxDecoration(
-      color: const Color(0xFF5C6BC0),
-      shape: BoxShape.circle,
-    ),
+    this.selectedDecoration,
     this.rangeStartTextStyle = const TextStyle(
       color: const Color(0xFFFAFAFA),
-      fontSize: 16.0,
+      fontSize: 14.0,
     ),
     this.rangeStartDecoration = const BoxDecoration(
       color: const Color(0xFF6699FF),
@@ -187,7 +185,7 @@ class CalendarStyle {
     ),
     this.rangeEndTextStyle = const TextStyle(
       color: const Color(0xFFFAFAFA),
-      fontSize: 16.0,
+      fontSize: 14.0,
     ),
     this.rangeEndDecoration = const BoxDecoration(
       color: const Color(0xFF6699FF),
@@ -195,7 +193,7 @@ class CalendarStyle {
     ),
     this.withinRangeTextStyle = const TextStyle(),
     this.withinRangeDecoration = const BoxDecoration(shape: BoxShape.circle),
-    this.outsideTextStyle = const TextStyle(color: const Color(0xFFAEAEAE)),
+    this.outsideTextStyle ,
     this.outsideDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.disabledTextStyle = const TextStyle(color: const Color(0xFFBFBFBF)),
     this.disabledDecoration = const BoxDecoration(shape: BoxShape.circle),
@@ -208,7 +206,7 @@ class CalendarStyle {
     ),
     this.weekendTextStyle = const TextStyle(color: const Color(0xFF5A5A5A)),
     this.weekendDecoration = const BoxDecoration(shape: BoxShape.circle),
-    this.defaultTextStyle = const TextStyle(),
+    this.defaultTextStyle,
     this.defaultDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.rowDecoration = const BoxDecoration(),
     this.tableBorder = const TableBorder(),
