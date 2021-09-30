@@ -85,6 +85,9 @@ class TableCalendar<T> extends StatefulWidget {
   /// Determines the visibility of calendar header.
   final bool headerVisible;
 
+  /// Determines the visibility of calendar base design.
+  final bool footerVisible;
+
   /// Determines the visibility of the row of days of the week.
   final bool daysOfWeekVisible;
 
@@ -219,6 +222,7 @@ class TableCalendar<T> extends StatefulWidget {
       CalendarFormat.week: 'Week',
     },
     this.headerVisible = true,
+    this.footerVisible = false,
     this.daysOfWeekVisible = true,
     this.pageJumpingEnabled = false,
     this.pageAnimationEnabled = true,
@@ -540,6 +544,36 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
             },
           ),
         ),
+        SizedBox(
+          height: 20,
+        ),
+        if (widget.footerVisible)
+          ValueListenableBuilder<DateTime>(
+            valueListenable: _focusedDay,
+            builder: (context, value, _) {
+              return CalendarBase(
+                headerTitleBuilder: widget.calendarBuilders.headerTitleBuilder,
+                focusedMonth: value,
+                onLeftChevronTap: _onLeftChevronTap,
+                onRightChevronTap: _onRightChevronTap,
+                onHeaderTap: () => widget.onHeaderTapped?.call(value),
+                onHeaderLongPress: () =>
+                    widget.onHeaderLongPressed?.call(value),
+                headerStyle: widget.headerStyle,
+                availableCalendarFormats: widget.availableCalendarFormats,
+                calendarFormat: widget.calendarFormat,
+                locale: widget.locale,
+                onFormatButtonTap: (format) {
+                  assert(
+                    widget.onFormatChanged != null,
+                    'Using `FormatButton` without providing `onFormatChanged` will have no effect.',
+                  );
+
+                  widget.onFormatChanged?.call(format);
+                },
+              );
+            },
+          ),
       ],
     );
   }
